@@ -6,7 +6,7 @@
 /*   By: fporto <fporto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 05:58:41 by fporto            #+#    #+#             */
-/*   Updated: 2022/03/03 17:06:58 by fporto           ###   ########.fr       */
+/*   Updated: 2022/03/04 22:29:18 by fporto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <stdlib.h>
 # include <stddef.h>
 # include "ft_stack.h"
+
+# define PRINT_MOVES 1
 
 void	pa(t_ps *ps);
 void	pb(t_ps *ps);
@@ -32,9 +34,11 @@ void	ss(t_ps *ps);
 
 void	err_exit(char *err);
 
+void	destroy_ps(t_ps *ps);
+
 int		is_sorted(t_stack *arr);
 
-void	ft_copystack(int size, int arr[], int copy[]);
+void	ft_copyarr(int size, int arr[], int copy[]);
 
 t_ps	*parse_args(int argc, char *argv[]);
 t_ps	*parse_string(char *s);
@@ -51,5 +55,8 @@ int		get_cont_i(t_stack *stack, int n);
 
 int		*stack_to_array(t_stack *s, int size);
 t_stack	*array_to_stack(int arr[], int size);
+
+void	midpoint(t_ps *ps);
+void	track_chunks(t_stack *stack, int chunk, int n);
 
 #endif

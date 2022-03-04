@@ -6,7 +6,7 @@
 /*   By: fporto <fporto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 16:46:37 by fporto            #+#    #+#             */
-/*   Updated: 2022/03/03 16:46:38 by fporto           ###   ########.fr       */
+/*   Updated: 2022/03/04 19:34:22 by fporto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,6 @@ void	ra(t_ps *ps)
 	while (curr->prev)
 		curr = curr->prev;
 	curr->prev = tmp;
+	if (PRINT_MOVES)
+		ft_putstr_fd("ra\n", 1);
 }

@@ -6,7 +6,7 @@
 /*   By: fporto <fporto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 16:46:47 by fporto            #+#    #+#             */
-/*   Updated: 2022/03/03 16:46:47 by fporto           ###   ########.fr       */
+/*   Updated: 2022/03/04 19:34:31 by fporto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,6 @@ void	rrb(t_ps *ps)
 	curr->prev = NULL;
 	tmp->prev = ps->b->top;
 	ps->b->top = tmp;
+	if (PRINT_MOVES)
+		ft_putstr_fd("rrb\n", 1);
 }

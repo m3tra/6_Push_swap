@@ -6,7 +6,7 @@
 /*   By: fporto <fporto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 16:47:35 by fporto            #+#    #+#             */
-/*   Updated: 2022/03/03 18:22:01 by fporto           ###   ########.fr       */
+/*   Updated: 2022/03/04 22:37:32 by fporto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	is_sorted(t_stack *arr)
 	temp = arr->top;
 	while (temp->prev)
 	{
-		// if (ft_atoi(temp->cont.ptr) > ft_atoi(temp->prev->cont.ptr))
 		if (temp->cont.i > temp->prev->cont.i)
 			return (0);
 		temp = temp->prev;
@@ -82,9 +81,9 @@ int	is_sorted(t_stack *arr)
 
 int	has_duplicates(t_stack *stack)
 {
-	size_t			i;
-	t_stack_elem	*temp;
-	int				*arr;
+	int	i;
+	int	*arr;
+	// t_stack_elem	*temp;
 
 	i = 0;
 
@@ -94,18 +93,24 @@ int	has_duplicates(t_stack *stack)
 
 	arr = stack_to_array(stack, stack->size);
 	quicksort(arr, 0, stack->size - 1);
-	stack = array_to_stack(arr, stack->size);
+	// printf("Sorted array:\n");
+	// for (i = 0; i < (int) stack->size; i++)
+	// 	printf("%d\n", arr[i]);
+
+	i = -1;
+	while (++i < (int) stack->size - 1)
+	{
+		if (arr[i] == arr[i + 1])
+		{
+			free(arr);
+			return (1);
+		}
+	}
+
+	// stack = array_to_stack(arr, stack->size);
 
 	// printf("After sort:\n");
 	// ft_stackprint(stack, NULL, "\n");
-
-	temp = stack->top;
-	while (temp->prev)
-	{
-		if (temp->cont.i == temp->prev->cont.i)
-			return (1);
-		temp = temp->prev;
-	}
-
+	free(arr);
 	return (0);
 }

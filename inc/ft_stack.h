@@ -6,7 +6,7 @@
 /*   By: fporto <fporto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 16:50:19 by fporto            #+#    #+#             */
-/*   Updated: 2022/03/03 19:46:00 by fporto           ###   ########.fr       */
+/*   Updated: 2022/03/04 22:16:45 by fporto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 
 typedef union u_content
 {
-	void	*ptr;
+	char	*arr;
+	size_t	size;
 	int		i;
 }				t_content;
 
@@ -26,6 +27,19 @@ typedef struct s_stack_elem
 	t_content			cont;
 	struct s_stack_elem	*prev;
 }				t_stack_elem;
+
+// typedef struct s_chunk_elem
+// {
+// 	size_t				size;
+// 	int					*arr;
+// 	struct s_chunk_elem	*prev;
+// }				t_chunk_elem;
+
+// typedef struct s_chunk
+// {
+// 	size_t			size;
+// 	t_chunk_elem	*top;
+// }				t_chunk;
 
 typedef struct s_stack
 {
@@ -37,8 +51,7 @@ typedef struct s_ps
 {
 	t_stack	*a;
 	t_stack	*b;
-	t_stack	*as;
-	t_stack	*bs;
+	t_stack	*chunks;
 }	t_ps;
 
 void		ft_stackdestroy(t_stack *stack, void (*del)(t_content));

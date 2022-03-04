@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   aux.c                                              :+:      :+:    :+:   */
+/*   aux_funcs.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fporto <fporto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 16:47:13 by fporto            #+#    #+#             */
-/*   Updated: 2022/03/03 20:02:43 by fporto           ###   ########.fr       */
+/*   Updated: 2022/03/04 18:07:47 by fporto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,19 @@ t_stack	*array_to_stack(int arr[], int size)
 	stack = ft_stacknew();
 	while (--size >= 0)
 	{
-		cont.ptr = NULL;
+		cont.arr = NULL;
 		cont.i = arr[size];
 		ft_stackpush(stack, cont);
 	}
 	return (stack);
 }
+
+void	sort_chunk(int *arr, int size)
+{
+	quicksort(arr, 0, size - 1);
+}
+
+// void	track_chunks(t_stack *stack, )
+// {
+
+// }

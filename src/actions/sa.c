@@ -6,7 +6,7 @@
 /*   By: fporto <fporto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 16:46:51 by fporto            #+#    #+#             */
-/*   Updated: 2022/03/03 16:46:51 by fporto           ###   ########.fr       */
+/*   Updated: 2022/03/04 19:34:35 by fporto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,6 @@ void	sa(t_ps *ps)
 	tmp2 = ft_stackpop(ps->a);
 	ft_stackpush(ps->a, tmp1);
 	ft_stackpush(ps->a, tmp2);
+	if (PRINT_MOVES)
+		ft_putstr_fd("sa\n", 1);
 }
