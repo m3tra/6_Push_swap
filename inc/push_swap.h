@@ -6,7 +6,7 @@
 /*   By: fporto <fporto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 05:58:41 by fporto            #+#    #+#             */
-/*   Updated: 2022/03/04 22:29:18 by fporto           ###   ########.fr       */
+/*   Updated: 2022/03/06 23:18:59 by fporto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,30 +33,28 @@ void	sb(t_ps *ps);
 void	ss(t_ps *ps);
 
 void	err_exit(char *err);
-
+int		get_cont_i(t_stack *stack, int n);
+void	has_duplicates(t_ps *ps);
+int		is_sorted(t_stack *arr, int asc);
 void	destroy_ps(t_ps *ps);
 
-int		is_sorted(t_stack *arr);
+void	new_chunk(t_ps *ps);
+void	add_to_chunk(t_ps *ps);
+void	subtract_from_chunk(t_ps *ps);
+void	print_chunks(t_ps *ps);
 
-void	ft_copyarr(int size, int arr[], int copy[]);
-
-t_ps	*parse_args(int argc, char *argv[]);
-t_ps	*parse_string(char *s);
-void	pick(t_ps *ps);
-void	execute_big(t_ps *ps);
-void	execute_med(t_ps *ps);
-void	execute_small(t_ps *ps);
+int		*stack_to_array(t_stack *stack);
+t_stack	*array_to_stack(int arr[], int size);
+int		find_in_arr(int *arr, int size, int n);
 
 void	quicksort(int arr[], int lower, int upper);
 void	quicksort_stack(t_stack *stack, int lower, int upper);
-
-int		has_duplicates(t_stack *stack);
-int		get_cont_i(t_stack *stack, int n);
-
-int		*stack_to_array(t_stack *s, int size);
-t_stack	*array_to_stack(int arr[], int size);
+void	sort_trio(t_ps *ps);
 
 void	midpoint(t_ps *ps);
-void	track_chunks(t_stack *stack, int chunk, int n);
+void	move_highest(t_ps *ps);
+
+t_ps	*parse_args(int argc, char *argv[]);
+t_ps	*parse_string(char *s);
 
 #endif

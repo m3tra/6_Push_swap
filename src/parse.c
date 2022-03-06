@@ -6,7 +6,7 @@
 /*   By: fporto <fporto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 16:47:22 by fporto            #+#    #+#             */
-/*   Updated: 2022/03/04 18:09:55 by fporto           ###   ########.fr       */
+/*   Updated: 2022/03/06 23:18:51 by fporto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,27 +32,27 @@ void	destroy_ps(t_ps *ps)
 	if (ps->b)
 		ft_stackdestroy(ps->b, NULL);
 	if (ps->chunks)
-		ft_stackdestroy(ps->chunks, NULL);
+		ft_stackdestroy(ps->chunks, free);
 	free(ps);
 }
 
-static int	check_int(const char *n)
+static int	check_int(const char *arg)
 {
 	int	count;
 
 	count = -1;
-	if (*n == '-')
+	if (*arg == '-')
 		count++;
-	while (n[++count])
-		if (!ft_isdigit(*(n + count)))
+	while (arg[++count])
+		if (!ft_isdigit(*(arg + count)))
 			return (0);
-	if (count == 1 && n[0] == '-')
+	if (count == 1 && arg[0] == '-')
 		return (0);
-	if (n[0] == '-' && (ft_strlen(n) > 11 || (ft_strlen(n) == 11
-				&& ft_memcmp(n, "-2147483648", 11) > 0)))
+	if (arg[0] == '-' && (ft_strlen(arg) > 11 || (ft_strlen(arg) == 11 \
+		&& ft_memcmp(arg, "-2147483648", 11) > 0)))
 		return (0);
-	if (n[0] != '-' && ((ft_strlen(n) == 10
-				&& ft_memcmp(n, "2147483647", 11) > 0) || ft_strlen(n) > 10))
+	if (arg[0] != '-' && ((ft_strlen(arg) == 10 \
+		&& ft_memcmp(arg, "2147483647", 11) > 0) || ft_strlen(arg) > 10))
 		return (0);
 	return (1);
 }
@@ -75,24 +75,21 @@ t_ps	*parse_args(int argc, char *argv[])
 		if (!check_int(argv[argc]))
 			return (NULL);
 		tmp.i = ft_atoi(argv[argc]);
+		tmp.arr = NULL;
+		tmp.size = 0;
 		ft_stackpush(ret->a, tmp);
 	}
-	if (has_duplicates(ret->a))
-	{
-		err_exit("Has duplicates");
-		destroy_ps(ret);
-		return (NULL);
-	}
+	has_duplicates(ret);
 	return (ret);
 }
 
-t_ps	*parse_string(char *s)
+t_ps	*parse_string(char *arg)
 {
 	t_ps	*ret;
 	char	**nums;
 	int		count;
 
-	nums = ft_split(s, ' ');
+	nums = ft_split(arg, ' ');
 	count = 0;
 	while (nums[count])
 		count++;

@@ -6,112 +6,99 @@
 /*   By: fporto <fporto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 16:47:24 by fporto            #+#    #+#             */
-/*   Updated: 2022/03/04 22:36:59 by fporto           ###   ########.fr       */
+/*   Updated: 2022/03/06 23:09:16 by fporto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-size_t	middle_index(t_stack *stack)
-{
-	size_t	index;
-
-	index = stack->size / 2;
-	return ((int) index);
-}
-
-int	find_lower_top(int *arr, int size, int mid)
+int	find_lower(int *arr, int size, int mid, int top)
 {
 	int	i;
 
 	i = 0;
-	while (i < size)
+	if (top)
 	{
-		if (arr[i] < mid)
-			return (i);
-		i++;
-	}
-	return (-1);
-}
-
-int	find_lower_bottom(int *arr, int size, int mid)
-{
-	int	i;
-
-	i = size;
-	while (size > 0)
-	{
-		if (arr[--i] <= mid)
-			return (i);
-		size--;
-	}
-	return (-1);
-}
-
-int	find_nearest(int arr[], int size, int mid)
-{
-	int	top;
-	int	bot;
-
-	if (size <= 1)
+		while (i < size)
+		{
+			if (arr[i] < mid)
+				return (i);
+			i++;
+		}
 		return (-1);
-	top = find_lower_top(arr, size, mid);
-	bot = find_lower_bottom(arr, size, mid);
-	if (top != -1 && bot != -1)
+	}
+	else
 	{
-		if ((size - 1 - bot) < top)
-			return(bot);
+		while (size > 0)
+		{
+			if (arr[size - 1] < mid)
+				return (--size);
+			size--;
+		}
+		return (-1);
+	}
+}
+
+int	find_nearest_lower(int *arr, int size, int mid)
+{
+	int	from_first;
+	int	from_last;
+
+	if (size <= 2)
+		return (-1);
+	from_first = find_lower(arr, size, mid, 1);
+	from_last = find_lower(arr, size, mid, 0);
+	// printf("*******\nMid: %d Size: %d\n", mid, size);
+	// printf("from_first: %d\nfrom_last: %d\n", from_first, from_last);
+	// printf("arr[0]: %d\n", arr[0]);
+	if (from_first != -1 && from_last != -1)
+	{
+		if ((size - 1 - from_last) < from_first)
+			return (from_last);
 		else
-			return (top);
+			return (from_first);
 	}
 	else
 		return (-1);
 }
 
-int	find_in_arr(int *arr, int size, int n)
+void	nearest_way(t_ps *ps, int nearest)
 {
 	int	i;
 
-	i = -1;
-	while (++i < size)
-		if (arr[i] == n)
-			return (i);
-	return (-1);
-}
-
-void	move_lower_than(t_ps *ps, int mid, int *nearest)
-{
-	int	i;
-	int	*arr;
-
-	arr = stack_to_array(ps->a, ps->a->size);
-
-	printf("Nearest: %d Mid: %d\n", *nearest, mid);
-	ft_stackprint(ps->a, NULL, " ");
-
-	*nearest = find_nearest(arr, ps->a->size, mid);
-	if (((int) ps->a->size - 1 - *nearest) < *nearest)
+	if (((int) ps->a->size - 1 - nearest) < nearest)
 	{
 		i = ps->a->size;
-		while (--i >= *nearest)
+		while (--i >= nearest)
 			rra(ps);
-		pb(ps);
 	}
 	else
 	{
 		i = -1;
-		while (++i < *nearest)
+		while (++i < nearest)
 			ra(ps);
-		pb(ps);
 	}
-	*nearest = find_nearest(arr, ps->a->size, mid);
+}
+
+void	move_lower_than(t_ps *ps, int mid, int *nearest)
+{
+	int	*arr;
+
+	arr = stack_to_array(ps->a);
+	*nearest = find_nearest_lower(arr, ps->a->size, mid);
+	free(arr);
+	if (*nearest == -1)
+		return ;
+	// printf("Nearest: %d Mid: %d Size: %ld\n", *nearest, mid, ps->a->size);
+	// ft_stackprint(ps->a, NULL, " ");
+	nearest_way(ps, *nearest);
+	add_to_chunk(ps);
+	pb(ps);
+	arr = stack_to_array(ps->a);
+	*nearest = find_nearest_lower(arr, ps->a->size, mid);
+	free(arr);
 	if (*nearest >= 0 && ps->a->size > 1)
-	{
-		free(arr);
 		move_lower_than(ps, mid, nearest);
-	}
-	else
-		free(arr);
 }
 
 void	midpoint(t_ps *ps)
@@ -120,28 +107,24 @@ void	midpoint(t_ps *ps)
 	int			*sorted;
 	int			nearest;
 	int			mid;
-	t_content	content;
-	content.size = 0;
 
-	content.arr = "";
-	ft_stackpush(ps->chunks, content);
-	arr = stack_to_array(ps->a, ps->a->size);
-	sorted = stack_to_array(ps->a, ps->a->size);
+	new_chunk(ps);
+	arr = stack_to_array(ps->a);
+	sorted = stack_to_array(ps->a);
 	quicksort(sorted, 0, ps->a->size - 1);
-	mid = sorted[middle_index(ps->a)];
+	mid = sorted[(int)(ps->a->size / 2)];
 	free(sorted);
 
-	printf("\nmid_index: %d\n", find_in_arr(arr, ps->a->size, mid));
-	printf("Midpoint: %d\n", mid);
-	printf("StackB:\nSize: %zu\n", ps->b->size);
-	ft_stackprint(ps->b, NULL, "\n");
+	// printf("\nmid_index: %d\n", find_in_arr(arr, ps->a->size, mid));
+	// printf("StackB:\nSize: %zu\n", ps->b->size);
+	// ft_stackprint(ps->b, NULL, "\n");
 
-	nearest = find_nearest(arr, ps->a->size, mid);
+	nearest = find_nearest_lower(arr, ps->a->size, mid);
+	// printf("-----Move Lower Than-----\n");
 	while (nearest >= 0)
 		move_lower_than(ps, mid, &nearest);
 	free(arr);
-	if (ps->a->size <= 1)
+	if (ps->a->size == 3)
 		return ;
-	else
-		midpoint(ps);
+	midpoint(ps);
 }

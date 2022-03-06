@@ -6,7 +6,7 @@
 /*   By: fporto <fporto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 16:47:13 by fporto            #+#    #+#             */
-/*   Updated: 2022/03/04 18:07:47 by fporto           ###   ########.fr       */
+/*   Updated: 2022/03/06 23:10:00 by fporto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,16 @@ int	get_cont_i(t_stack *stack, int n)
 	return (elem->cont.i);
 }
 
-int	*stack_to_array(t_stack *s, int size)
+int	*stack_to_array(t_stack *stack)
 {
 	int				*ret;
 	t_stack_elem	*curr;
-	int				i;
+	size_t			i;
 
-	ret = malloc(sizeof(int) * size);
-	curr = s->top;
+	ret = malloc(sizeof(int) * stack->size);
+	curr = stack->top;
 	i = 0;
-	while (i < size)
+	while (i < stack->size)
 	{
 		ret[i++] = curr->cont.i;
 		curr = curr->prev;
@@ -69,12 +69,13 @@ t_stack	*array_to_stack(int arr[], int size)
 	return (stack);
 }
 
-void	sort_chunk(int *arr, int size)
+int	find_in_arr(int *arr, int size, int n)
 {
-	quicksort(arr, 0, size - 1);
+	int	i;
+
+	i = -1;
+	while (++i < size)
+		if (arr[i] == n)
+			return (i);
+	return (-1);
 }
-
-// void	track_chunks(t_stack *stack, )
-// {
-
-// }

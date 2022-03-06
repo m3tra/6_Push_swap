@@ -6,7 +6,7 @@
 /*   By: fporto <fporto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 16:50:19 by fporto            #+#    #+#             */
-/*   Updated: 2022/03/04 22:16:45 by fporto           ###   ########.fr       */
+/*   Updated: 2022/03/06 18:53:36 by fporto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "libft.h"
 
-typedef union u_content
+typedef struct u_content
 {
 	char	*arr;
 	size_t	size;
@@ -27,19 +27,6 @@ typedef struct s_stack_elem
 	t_content			cont;
 	struct s_stack_elem	*prev;
 }				t_stack_elem;
-
-// typedef struct s_chunk_elem
-// {
-// 	size_t				size;
-// 	int					*arr;
-// 	struct s_chunk_elem	*prev;
-// }				t_chunk_elem;
-
-// typedef struct s_chunk
-// {
-// 	size_t			size;
-// 	t_chunk_elem	*top;
-// }				t_chunk;
 
 typedef struct s_stack
 {
@@ -54,7 +41,7 @@ typedef struct s_ps
 	t_stack	*chunks;
 }	t_ps;
 
-void		ft_stackdestroy(t_stack *stack, void (*del)(t_content));
+void		ft_stackdestroy(t_stack *stack, void (*del)(void *));
 t_stack		*ft_stackdup(t_stack *o, t_content(*dup)(t_content));
 t_stack		*ft_stacknew(void);
 t_content	ft_stackpeek(t_stack *stack);
