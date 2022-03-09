@@ -6,7 +6,7 @@
 /*   By: fporto <fporto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 17:54:40 by fporto            #+#    #+#             */
-/*   Updated: 2022/03/06 23:19:35 by fporto           ###   ########.fr       */
+/*   Updated: 2022/03/09 20:59:37 by fporto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ void	add_to_chunk(t_ps *ps)
 
 	elem = ps->chunks->top;
 	conv = ft_itoa(ps->a->top->cont.i);
-	if (elem->cont.size >= 1)
+	// printf("a->top->cont.i: %d\n", ps->a->top->cont.i);
+	if (elem->cont.size > 0)
 		tmp = ft_strjoin(elem->cont.arr, " ");
 	else
 		tmp = ft_strjoin(elem->cont.arr, "");
@@ -42,30 +43,6 @@ void	add_to_chunk(t_ps *ps)
 	free(elem->cont.arr);
 	elem->cont.arr = tmp;
 	elem->cont.size++;
-	free(conv);
-}
-
-static	void	cut_number(t_ps *ps, int size)
-{
-	char		*ret;
-
-	ret = ft_strdup(ps->chunks->top->cont.arr + size + 1);
-	free (ps->chunks->top->cont.arr);
-	ps->chunks->top->cont.arr = ret;
-}
-
-void	subtract_from_chunk(t_ps *ps)
-{
-	int		n;
-	char	*conv;
-	size_t	size;
-
-	n = ps->b->top->cont.i;
-	conv = ft_itoa(n);
-	size = ft_strlen(ps->chunks->top->cont.arr) - ft_strlen(conv);
-	cut_number(ps, size);
-	ps->chunks->top->cont.size--;
-	// printf("subtract: %d\n", n);
 	free(conv);
 }
 
@@ -90,5 +67,7 @@ void	print_chunks(t_ps *ps)
 			ft_putstr_fd(elem->cont.arr, 1);
 		}
 	}
+	else
+		ft_putstr_fd("\tNo chunks\n", 1);
 	ft_putstr_fd("\n\n", 1);
 }

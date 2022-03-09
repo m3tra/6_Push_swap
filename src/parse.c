@@ -6,24 +6,11 @@
 /*   By: fporto <fporto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 16:47:22 by fporto            #+#    #+#             */
-/*   Updated: 2022/03/06 23:18:51 by fporto           ###   ########.fr       */
+/*   Updated: 2022/03/09 17:13:56 by fporto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-t_ps	*dup_ps(t_ps *ps)
-{
-	t_ps	*ret;
-
-	ret = malloc(sizeof(t_ps));
-	if (!ret)
-		return (NULL);
-	ret->a = ft_stackdup(ps->a, NULL);
-	ret->b = ft_stackdup(ps->b, NULL);
-	ret->chunks = ft_stackdup(ps->chunks, NULL);
-	return (ret);
-}
 
 void	destroy_ps(t_ps *ps)
 {
@@ -60,7 +47,7 @@ static int	check_int(const char *arg)
 t_ps	*parse_args(int argc, char *argv[])
 {
 	t_ps		*ret;
-	t_content	tmp;
+	t_content	cont;
 
 	ret = malloc(sizeof(t_ps));
 	if (!ret)
@@ -74,16 +61,16 @@ t_ps	*parse_args(int argc, char *argv[])
 			destroy_ps(ret);
 		if (!check_int(argv[argc]))
 			return (NULL);
-		tmp.i = ft_atoi(argv[argc]);
-		tmp.arr = NULL;
-		tmp.size = 0;
-		ft_stackpush(ret->a, tmp);
+		cont.i = ft_atoi(argv[argc]);
+		cont.arr = NULL;
+		cont.size = 0;
+		ft_stackpush(ret->a, cont);
 	}
 	has_duplicates(ret);
 	return (ret);
 }
 
-t_ps	*parse_string(char *arg)
+t_ps	*parse_string(const char *arg)
 {
 	t_ps	*ret;
 	char	**nums;

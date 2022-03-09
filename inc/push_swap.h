@@ -6,7 +6,7 @@
 /*   By: fporto <fporto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 05:58:41 by fporto            #+#    #+#             */
-/*   Updated: 2022/03/06 23:18:59 by fporto           ###   ########.fr       */
+/*   Updated: 2022/03/09 20:41:31 by fporto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,18 @@ int		*stack_to_array(t_stack *stack);
 t_stack	*array_to_stack(int arr[], int size);
 int		find_in_arr(int *arr, int size, int n);
 
+t_ps	*parse_args(int argc, char *argv[]);
+t_ps	*parse_string(const char *s);
+
 void	quicksort(int arr[], int lower, int upper);
 void	quicksort_stack(t_stack *stack, int lower, int upper);
-void	sort_trio(t_ps *ps);
 
 void	midpoint(t_ps *ps);
+void	sort_trio(t_ps *ps);
 void	move_highest(t_ps *ps);
 
-t_ps	*parse_args(int argc, char *argv[]);
-t_ps	*parse_string(char *s);
+//TODO
+
+void	print_ps(t_ps *ps);
 
 #endif
