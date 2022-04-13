@@ -6,7 +6,7 @@
 /*   By: fporto <fporto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 16:47:35 by fporto            #+#    #+#             */
-/*   Updated: 2022/03/06 23:18:38 by fporto           ###   ########.fr       */
+/*   Updated: 2022/03/09 23:36:54 by fporto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	has_duplicates(t_ps *ps)
 		{
 			free(arr);
 			destroy_ps(ps);
-			err_exit("Has duplicates");
+			err_exit();
 		}
 	}
 	free(arr);

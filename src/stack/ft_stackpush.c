@@ -6,7 +6,7 @@
 /*   By: fporto <fporto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 01:03:41 by mgueifao          #+#    #+#             */
-/*   Updated: 2022/03/05 15:34:22 by fporto           ###   ########.fr       */
+/*   Updated: 2022/03/09 22:42:34 by fporto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_stackpush(t_stack *stack, t_content content)
 
 	new = malloc(sizeof(t_stack_elem));
 	if (!new)
-		err_exit("@ft_stackpush()");
+		err_exit();
 	new->cont = content;
 	new->prev = stack->top;
 	stack->top = new;

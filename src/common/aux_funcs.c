@@ -6,18 +6,16 @@
 /*   By: fporto <fporto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 16:47:13 by fporto            #+#    #+#             */
-/*   Updated: 2022/03/06 23:10:00 by fporto           ###   ########.fr       */
+/*   Updated: 2022/03/09 22:42:50 by fporto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "ft_stack.h"
 
-void	err_exit(char *err)
+void	err_exit(void)
 {
-	ft_putstr_fd("Error\n", 1);
-	ft_putstr_fd(err, 1);
-	ft_putchar_fd('\n', 1);
+	ft_putstr_fd("Error\n", 2);
 	exit(EXIT_FAILURE);
 }
 

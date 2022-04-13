@@ -6,7 +6,7 @@
 /*   By: fporto <fporto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 16:47:22 by fporto            #+#    #+#             */
-/*   Updated: 2022/03/09 17:13:56 by fporto           ###   ########.fr       */
+/*   Updated: 2022/04/13 16:38:33 by fporto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	destroy_ps(t_ps *ps)
 		ft_stackdestroy(ps->b, NULL);
 	if (ps->chunks)
 		ft_stackdestroy(ps->chunks, free);
+	if (ps->moves)
+		moves_list_destroy(ps->moves);
 	free(ps);
 }
 
@@ -54,7 +56,8 @@ t_ps	*parse_args(int argc, char *argv[])
 		return (NULL);
 	ret->a = ft_stacknew();
 	ret->b = ft_stacknew();
-	ret->chunks = NULL;
+	ret->chunks = ft_stacknew();
+	ret->moves = moves_list_new();
 	while (argc--)
 	{
 		if (!check_int(argv[argc]))

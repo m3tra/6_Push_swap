@@ -6,7 +6,7 @@
 /*   By: fporto <fporto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 17:54:40 by fporto            #+#    #+#             */
-/*   Updated: 2022/03/09 20:59:37 by fporto           ###   ########.fr       */
+/*   Updated: 2022/03/10 01:10:28 by fporto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	add_to_chunk(t_ps *ps)
 
 	elem = ps->chunks->top;
 	conv = ft_itoa(ps->a->top->cont.i);
-	// printf("a->top->cont.i: %d\n", ps->a->top->cont.i);
 	if (elem->cont.size > 0)
 		tmp = ft_strjoin(elem->cont.arr, " ");
 	else

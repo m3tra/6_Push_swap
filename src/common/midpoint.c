@@ -6,7 +6,7 @@
 /*   By: fporto <fporto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 16:47:24 by fporto            #+#    #+#             */
-/*   Updated: 2022/03/09 21:00:07 by fporto           ###   ########.fr       */
+/*   Updated: 2022/03/10 01:26:55 by fporto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,6 @@ static int	find_nearest_lower(int *arr, int size, int mid)
 		return (-1);
 	from_first = find_lower(arr, size, mid, 1);
 	from_last = find_lower(arr, size, mid, 0);
-	// printf("*******\nMid: %d Size: %d\n", mid, size);
-	// printf("from_first: %d\nfrom_last: %d\n", from_first, from_last);
-	// printf("arr[0]: %d\n", arr[0]);
 	if (from_first != -1 && from_last != -1)
 	{
 		if ((size - 1 - from_last) < from_first)
@@ -115,9 +112,6 @@ void	midpoint(t_ps *ps)
 	mid = sorted[(int)(ps->a->size / 2)];
 	free(sorted);
 	nearest = find_nearest_lower(arr, ps->a->size, mid);
-
-	// printf("a->size: %ld a->top: %d mid: %d nearest: %d\n", ps->a->size, ps->a->top->cont.i, mid , nearest);
-
 	free(arr);
 	while (nearest >= 0 && ps->a->size > 1)
 		move_lower_than(ps, mid, &nearest);
