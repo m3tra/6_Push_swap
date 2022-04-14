@@ -6,7 +6,7 @@
 /*   By: fporto <fporto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 16:50:19 by fporto            #+#    #+#             */
-/*   Updated: 2022/04/13 17:21:19 by fporto           ###   ########.fr       */
+/*   Updated: 2022/04/14 00:44:52 by fporto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,18 @@ typedef struct s_move
 	struct s_move	*next;
 }	t_move;
 
-typedef struct s_moves_list
+typedef struct t_mvs_lst
 {
 	size_t	size;
 	t_move	*first;
-}	t_moves_list;
+}	t_mvs_lst;
 
 typedef struct s_ps
 {
-	t_stack			*a;
-	t_stack			*b;
-	t_stack			*chunks;
-	t_moves_list	*moves;
+	t_stack		*a;
+	t_stack		*b;
+	t_stack		*chunks;
+	t_mvs_lst	*moves;
 }	t_ps;
 
 void		pa(t_ps *ps);
@@ -75,11 +75,11 @@ t_content	ft_stackpop(t_stack *stack);
 void		ft_stackprint(t_stack *s, char *(*to_str)(t_content), char *delim);
 void		ft_stackpush(t_stack *stack, t_content content);
 
-t_move			*move_new(char *str);
-t_moves_list	*moves_list_new(void);
-t_move			*moves_lstlast(t_moves_list *list);
-void			moves_list_cat(t_moves_list *lst, t_move *move);
-void			moves_list_pop(t_moves_list *list, t_move *move);
-void			moves_list_destroy(t_moves_list *moves);
+t_move		*move_new(char *str);
+t_mvs_lst	*moves_list_new(void);
+t_move		*moves_lstlast(t_mvs_lst *list);
+void		moves_list_cat(t_mvs_lst *lst, t_move *move);
+void		moves_list_pop(t_mvs_lst *list, t_move *move);
+void		moves_list_destroy(t_mvs_lst *moves);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: fporto <fporto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 23:47:01 by fporto            #+#    #+#             */
-/*   Updated: 2022/04/13 17:21:44 by fporto           ###   ########.fr       */
+/*   Updated: 2022/04/14 00:50:02 by fporto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ t_move	*move_new(char *str)
 	return (move);
 }
 
-t_moves_list	*moves_list_new(void)
+t_mvs_lst	*moves_list_new(void)
 {
-	t_moves_list	*list;
+	t_mvs_lst	*list;
 
-	list = malloc(sizeof(t_moves_list));
+	list = malloc(sizeof(t_mvs_lst));
 	if (!list)
 		err_exit();
 	list->size = 0;
@@ -37,7 +37,7 @@ t_moves_list	*moves_list_new(void)
 	return (list);
 }
 
-t_move	*moves_lstlast(t_moves_list *list)
+t_move	*moves_lstlast(t_mvs_lst *list)
 {
 	t_move	*move;
 
@@ -49,7 +49,7 @@ t_move	*moves_lstlast(t_moves_list *list)
 	return (move);
 }
 
-void	moves_list_cat(t_moves_list *list, t_move *move)
+void	moves_list_cat(t_mvs_lst *list, t_move *move)
 {
 	t_move	*prev;
 
@@ -65,24 +65,12 @@ void	moves_list_cat(t_moves_list *list, t_move *move)
 	move->next = NULL;
 }
 
-void	moves_list_pop(t_moves_list *list, t_move *move)
+void	moves_list_pop(t_mvs_lst *list, t_move *move)
 {
+	if (list->first == move)
+		list->first = move->next;
 	move->prev->next = move->next;
 	move->next->prev = move->prev;
 	free(move);
 	list->size--;
-}
-
-void	moves_list_destroy(t_moves_list *list)
-{
-	t_move	*tmp;
-
-	tmp = list->first;
-	while (tmp->next)
-	{
-		tmp = tmp->next;
-		free(tmp->prev);
-	}
-	free(tmp);
-	free(list);
 }

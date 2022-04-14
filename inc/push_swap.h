@@ -6,7 +6,7 @@
 /*   By: fporto <fporto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 05:58:41 by fporto            #+#    #+#             */
-/*   Updated: 2022/04/13 17:28:46 by fporto           ###   ########.fr       */
+/*   Updated: 2022/04/14 00:41:06 by fporto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stddef.h>
 # include "ft_stack.h"
 
-# define PRINT_MOVES 1
+# define PRINT_MOVES 0
 
 void	err_exit(void);
 int		get_cont_i(t_stack *stack, int n);
@@ -43,6 +43,7 @@ void	quicksort_stack(t_stack *stack, int lower, int upper);
 void	midpoint(t_ps *ps);
 void	sort_trio(t_ps *ps);
 void	move_highest(t_ps *ps);
+void	sort(t_ps *ps);
 void	optimize(t_ps *ps);
 
 void	print_ps(t_ps *ps);

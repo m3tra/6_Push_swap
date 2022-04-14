@@ -6,7 +6,7 @@
 /*   By: fporto <fporto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 16:47:13 by fporto            #+#    #+#             */
-/*   Updated: 2022/03/09 22:42:50 by fporto           ###   ########.fr       */
+/*   Updated: 2022/04/14 00:50:06 by fporto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,19 @@ t_stack	*array_to_stack(int arr[], int size)
 	return (stack);
 }
 
-int	find_in_arr(int *arr, int size, int n)
+void	moves_list_destroy(t_mvs_lst *list)
 {
-	int	i;
+	t_move	*tmp;
 
-	i = -1;
-	while (++i < size)
-		if (arr[i] == n)
-			return (i);
-	return (-1);
+	tmp = list->first;
+	if (tmp)
+	{
+		while (tmp->next)
+		{
+			tmp = tmp->next;
+			free(tmp->prev);
+		}
+		free(tmp);
+		free(list);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: fporto <fporto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 16:47:30 by fporto            #+#    #+#             */
-/*   Updated: 2022/04/13 16:02:13 by fporto           ###   ########.fr       */
+/*   Updated: 2022/04/14 00:59:17 by fporto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,7 @@ static void	execute(t_ps *ps)
 		destroy_ps(ps);
 		return ;
 	}
-	midpoint(ps);
-	while (ps->b->size > 0)
-		move_highest(ps);
+	sort(ps);
 }
 
 int	main(int argc, char **argv)
@@ -45,6 +43,7 @@ int	main(int argc, char **argv)
 		err_exit();
 	execute(ps);
 	optimize(ps);
+	print_move_list(ps->moves);
 	destroy_ps(ps);
 	return (0);
 }
